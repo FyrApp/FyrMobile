@@ -1,0 +1,241 @@
+html, body {
+	height: 100%;
+	width: 100%;
+	margin: 0;
+	background: black;
+	font-family: sans-serif;
+}
+
+.wrapper {
+	position: absolute;
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
+    max-width: 100%;
+    height: 100%;
+    max-height: 100%;
+    overflow: hidden; 
+}
+
+.main {
+	width: 100%;
+	height: 100%;
+	background: #d3d7dc;
+	border-radius: 3px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	-moz-box-shadow: 0 0 5px 2px #000;
+	-webkit-box-shadow: 0 0 5px 2px #000;
+	box-shadow: 0 0 5px 2px #000;
+	z-index: 3;
+}
+
+	.main .header {
+		position: fixed;
+		width: 100%;
+		height: 43px;
+		border-top-left-radius: 3px;
+		border-top-right-radius: 3px;
+		background: rgb(67,96,122); /* Old browsers */
+		background: -moz-linear-gradient(top,  rgba(67,96,122,1) 0%, rgba(28,52,76,1) 100%); /* FF3.6+ */
+		background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(67,96,122,1)), color-stop(100%,rgba(28,52,76,1))); /* Chrome,Safari4+ */
+		background: -webkit-linear-gradient(top,  rgba(67,96,122,1) 0%,rgba(28,52,76,1) 100%); /* Chrome10+,Safari5.1+ */
+		background: -o-linear-gradient(top,  rgba(67,96,122,1) 0%,rgba(28,52,76,1) 100%); /* Opera 11.10+ */
+		background: -ms-linear-gradient(top,  rgba(67,96,122,1) 0%,rgba(28,52,76,1) 100%); /* IE10+ */
+		background: linear-gradient(to bottom,  rgba(67,96,122,1) 0%,rgba(28,52,76,1) 100%); /* W3C */
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#43607a', endColorstr='#1c344c',GradientType=0 ); /* IE6-9 */
+		-moz-box-shadow:	0px 1px 2px #000;
+		-webkit-box-shadow: 0px 1px 2px #000;
+		box-shadow:			0px 1px 2px #000;
+		z-index: 4;
+	}
+	
+		.header .slide_button {
+			position: relative;
+			top: 10px;
+			left: 10px;			
+			float: left;
+		}
+		
+		.header .shareit_button {
+			position: relative;
+			top: 10px;
+			right: 10px;			
+			float: right;
+		}
+		
+		.header .logo {
+			position: relative;
+			top: 12px;
+			text-align: center;
+			margin: 0 auto;
+		}
+		
+			.logo img {
+				width: auto;
+				height: 15px;
+			}
+	
+	.main .content {
+		width: 100%;
+		height: 100%;
+		margin: 43px 0 0;
+		overflow-x:hidden;
+		overflow-y:scroll;
+		-webkit-overflow-scrolling: touch;
+	}
+		
+		.content .loading {
+			position: relative;
+			top: 100px;
+		}
+		
+			.loading p {
+				text-align: center;
+				color: #999;
+			}
+		
+		.content .update {
+			width: auto;
+			height: auto;
+			margin: 10px;
+			border-radius: 2px;
+			-moz-box-shadow:	1px 1px 1px #aaa;
+			-webkit-box-shadow: 1px 1px 1px #aaa;
+			box-shadow:			1px 1px 1px #aaa;
+		}
+		
+		.content .status {
+			width: auto;
+			height: auto;
+			background: #fff;
+			padding: 10px;
+			border-top-left-radius: 2px;
+			border-top-right-radius: 2px;
+		}
+		
+			.status img {
+				float: left;
+				margin-right: 10px;
+				margin-bottom: 10px;
+				border-radius: 50em;
+			}
+			
+			.status a {
+				text-decoration: none;
+				color: #576b95;
+				font-weight: bold;
+			}
+			
+			.status .time {
+				color: #aaa;
+				font-size: 10px;
+				margin:0 0 30px;
+			}
+		
+		.content .share {
+			width: auto;
+			height: 25px;
+			background: rgb(255,255,255); /* Old browsers */
+			background: -moz-linear-gradient(top,  rgba(255,255,255,1) 0%, rgba(236,239,241,1) 100%); /* FF3.6+ */
+			background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,1)), color-stop(100%,rgba(236,239,241,1))); /* Chrome,Safari4+ */
+			background: -webkit-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(236,239,241,1) 100%); /* Chrome10+,Safari5.1+ */
+			background: -o-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(236,239,241,1) 100%); /* Opera 11.10+ */
+			background: -ms-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(236,239,241,1) 100%); /* IE10+ */
+			background: linear-gradient(to bottom,  rgba(255,255,255,1) 0%,rgba(236,239,241,1) 100%); /* W3C */
+			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#eceff1',GradientType=0 ); /* IE6-9 */
+			padding: 10px;
+			border-bottom-left-radius: 2px;
+			border-bottom-right-radius: 2px;
+			border-top: 1px solid #ccc;
+		}
+
+.slider {
+	width: 85%;
+	height: 100%;
+	background: #32394a;
+	border-radius: 3px;
+	color: #c4ccda;
+	overflow-x:hidden;
+	overflow-y:scroll;
+	-webkit-overflow-scrolling: touch;
+	-moz-box-shadow: 0 0 5px 2px #000;
+	-webkit-box-shadow: 0 0 5px 2px #000;
+	box-shadow: 0 0 5px 2px #000;
+}
+
+.tile {
+	width: 100%;
+	height: 43px;
+	background: #32394a;
+	border-top: 1px solid #3e4555;
+	border-bottom: 1px solid #242a37;
+	border-top-left-radius: 3px;
+}
+
+	.tile p {
+		font-size: 17px;
+		margin: 10px 0;
+	}
+	
+	.tile img {
+		position: relative;
+		top: 9px;
+		height: 24px;
+		width: 24px;
+		margin: 0 7px;
+		float: left;
+	}
+		
+		.menu .selected {
+			background: #292f3d;
+			border-top: 1px solid #242a37;
+		}
+	
+		.menu .profile {
+			height: 50px;
+			border-top: none;
+			
+		}
+			.profile img {
+				width: 44px;
+				height: 44px;
+				top: 3px;
+				border-radius: 50em;
+			}
+			
+			.profile p {
+				margin: 0;
+				position: relative;
+				top: 12px;
+			}
+			
+	.menu .divider {
+		width: 100%;
+		height: 30px;
+		background: rgb(67,74,94); /* Old browsers */
+		background: -moz-linear-gradient(top,  rgba(67,74,94,1) 0%, rgba(57,64,82,1) 100%); /* FF3.6+ */
+		background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(67,74,94,1)), color-stop(100%,rgba(57,64,82,1))); /* Chrome,Safari4+ */
+		background: -webkit-linear-gradient(top,  rgba(67,74,94,1) 0%,rgba(57,64,82,1) 100%); /* Chrome10+,Safari5.1+ */
+		background: -o-linear-gradient(top,  rgba(67,74,94,1) 0%,rgba(57,64,82,1) 100%); /* Opera 11.10+ */
+		background: -ms-linear-gradient(top,  rgba(67,74,94,1) 0%,rgba(57,64,82,1) 100%); /* IE10+ */
+		background: linear-gradient(to bottom,  rgba(67,74,94,1) 0%,rgba(57,64,82,1) 100%); /* W3C */
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#434a5e', endColorstr='#394052',GradientType=0 ); /* IE6-9 */
+		border-bottom: 1px solid #242a37;
+	}
+	
+		.divider p {
+			margin: 0 10px;
+			position: relative;
+			top: 7px;
+			font-weight: bold;
+			font-size: 12px;
+		}
+		
+	.shareit {
+		position: absolute;
+		right: 0;
+		text-align: right;
+		z-index: 2;
+	}
