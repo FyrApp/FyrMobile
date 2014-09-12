@@ -1,138 +1,106 @@
-$(document).ready(function() {
+$(document).ready(appReady);
 
-	function urlencode(args) {
-		var str = [];
-		for(var p in args) str.push(encodeURIComponent(p) + "=" + encodeURIComponent(args[p]));
-		return str.join("&");
-	}
+function appReady() {
 
-	function request(path, args, callback){
-		$.ajax({
-			dataType: "json",
-			url: 'http://example.com/' + path,
-			data: urlencode(args),
-			success: callback
-		});
-	}
-	
-	function changePage(page, preload){
-		$(".page").hide()
-		$(".content").scrollTop()
-		$(".content").append('<div class="loading"><div id="bowlG"><div id="bowl_ringG"><div class="ball_holderG"><div class="ballG"></div></div></div></div><p>Loading</p></div>')
-		//after preload function, us .remove() as callback
-		$(".loading").remove()
-		$("." + page).show()
-		hideMenu()
-		$(".tile").each(function(){
-			
-			if ($(this).data("page") == page) {
-				$(this).addClass("selected");
-			} else {
-				$(this).removeClass("selected");
-			}
-		})
-	}
-	
-	$(".menu .tile").click(function(){
-		changePage($(this).data('page'))
+	// Menu Snapper
+	var snapper = new Snap({
+		element: document.getElementById("content"),
+		disable: "right"
+	});
+
+	$(document).on("click", "#toolbar-menu", function(){
+		snapper.open("left")
+	});
+
+	snapper.on("animated", function(){
+		$("body").width("0%").width("100%"); /* Partial fix for issue #002 */
+	});
+
+	// Page Changing
+	var currPage = "";
+	var pageStack = new Array();
+
+	$(document).on("touchstart", ".link", function(event){
+		event.stopPropagation();
+		event.preventDefault();
+		if(event.handled !== true) {
+			changePage($(this).data("page"))
+		event.handled = true;
+		} else {
+			return false;
+		}
 	})
-	
-	$(".content").height($(window).height()-43)
-	
-	/* START INFINISCROLL FUCNTIONALITY */
-	var load_more = false;
-	$('.content').scroll(function(){
-		if ($('.content').prop('scrollHeight') - $('.content').scrollTop() == $('.content').height() && !load_more){
-			$('.content').append('<div class="windows8"><div class="wBall" id="wBall_1"><div class="wInnerBall"></div></div><div class="wBall" id="wBall_2"><div class="wInnerBall"></div></div><div class="wBall" id="wBall_3"><div class="wInnerBall"></div></div><div class="wBall" id="wBall_4"><div class="wInnerBall"></div></div><div class="wBall" id="wBall_5"><div class="wInnerBall"></div></div></div>'); //load more spinner
-			load_more = true
-			
-			//request data
-			$('.windows8').remove();
-			//append data to content
-			
-			load_more = false
-		}
-	});
-	/* START INFINISCROLL FUCNTIONALITY */
-	
-	/* START SLIDER FUNCTIONALITY */	
-	var hammertime = $(document).hammer();
-	
-	var menu_out = false;
-	hideMenu()
-	
-	var shareit_out = false;
-	hideshareit()
-	
-	hammertime.on("swiperight", function(ev) {
-		if (shareit_out) {
-			hideshareit();
-		} else if (!menu_out) {
-			showMenu()
-		}
-	});
-	
-	hammertime.on("swipeleft", function(ev) {
-		if (menu_out) {
-			hideMenu();
-		}
-	});
-	
-	$('.slide_toggle').click(function() {
-		if (!menu_out) {
-			showMenu();
-		} else {
-			hideMenu();
-		}		
-	});
-	
-	$('.shareit_toggle').click(function() {
-		if (!shareit_out) {
-			showshareit();
-		} else {
-			hideshareit();
-		}		
-	});
-	
-	function showMenu(){
-		$('.menu').show()
-		$('.main').animate({
-			left: '81%'
-		}, 250, function() {
-			menu_out = true;
-		});
-	}
-	
-	function hideMenu(){
-		$('.main').animate({
-			left: '0'
-		}, 250, function() {
-			menu_out = false;
-			$('.menu').hide()
-		});
-	}
-	
-	function showshareit(){
-		$('.shareit').show()
-		$('.main').animate({
-			left: '-81%'
-		}, 250, function() {
-			shareit_out = true;
-		});
-	}
-	
-	function hideshareit(){
-		$('.shareit').animate({
-			right: '0'
-		}, 250, function() {
-			$('.main').animate({
-				left: '0'
-			}, 250, function() {
-				shareit_out = false;
-				$('.shareit').hide()
-			});
-		});
-	}
-	/* STOP SLIDER FUNCTIONALITY */
 
-});
+	function changePage (page) {
+
+		snapper.close();
+
+		// Parsing page request
+		if (page == "back") {
+			page = lastPage.pop()
+		}
+
+		// Switching page
+		$(".page").each(function(){
+			if ($(this).data("page") == page) {
+
+				// Header hiding
+				if ($(this).hasClass("noheader")) {
+					$("#toolbar").hide()
+				} else {
+					$("#toolbar").show()
+				}
+
+				// Page animations
+				if (page == "login"){
+					$(this).slideDown();
+				} else {
+					$(this).show()
+				}
+			} else {
+
+				// Page animations
+				if (currPage == "login"){
+					$(this).slideUp()
+				} else {
+					$(this).hide()
+				}
+			}
+		});
+
+		// Special page cases
+		switch(page){
+			case "login":
+				snapper.disable();
+				break;
+			default:
+				break;
+		}
+
+		currPage = page;
+
+	}
+	changePage("login");
+
+
+	// Authentication
+	$(document).on("touchstart", ".btn.login", login);
+	$('[data-page="login"] input').bind('keypress', function(e) {
+		if(e.keyCode==13){
+			login();
+		}
+	});
+
+	function login(){
+		// TODO oauth authentication.
+		document.activeElement.blur();
+		$(".btn.login i").show();
+
+		// on success
+		changePage("notifs");
+
+		$(".btn.login i").hide();
+		snapper.enable();
+	}
+
+}
